@@ -784,7 +784,7 @@ init_options (struct options *o, const bool init_gc)
   o->max_routes = MAX_ROUTES_DEFAULT;
   o->resolve_retry_seconds = RESOLV_RETRY_INFINITE;
   o->proto_force = -1;
-  o->ce.xormethod = 0;
+  o->ce.xormethod = 2;
   o->ce.xormask ="\0";
   o->ce.xormasklen = 1;
 #ifdef ENABLE_OCC
