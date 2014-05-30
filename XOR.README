@@ -1,0 +1,18 @@
+From:
+https://forums.openvpn.net/topic12605.html
+
+I have created a patch which introduces some forms of scrambling to the packet payload of any OpenVPN connection. I have been successfully using the patch with Iranian and Chinese users for some time now. To use it you need to introduce one of the following options to your config files, both on clients and server. The option must also match on both for it to work. For clients, the option will work as a global setting, or can also be applied to specific servers, utilising the <connection> format.
+
+The possible options are, currently (all of them work in Iran and China). The options are currently under test to see what works best.
+
+"scramble" is the leftmost option name. This can be followed by a string which will be used to perform a simple xor operation the packet payload.
+
+However if the following are used instead, a different action will occur.
+"scramble reverse" - This simply reverses all the data in the packet. This is enough to get past the regular expression detection in both China and Iran.
+"scramble xorptrpos" - This performs a xor operation, utilising the current position in the packet payload.
+"scramble obfuscate password" - This method is more secure. It utilises the 3 types of scrambling mentioned above. "password" is the string which you want to use. 
+
+With this obfuscate option, I think that it is ok to use "cipher none", because working out the method used would take a lot of cryptoanalysis. The obfuscate option is also much easier on the CPU than any cipher options This is incase you are using ddwrt or openwrt or have a low speed cpu.
+
+Here are some examples of how to use it.
+
